@@ -19,4 +19,8 @@ pre {
 #input:hover, #output .entry:hover {
     color: #CCF;
 }
+
+.cursor {
+	text-decoration: blink;
+}
 ​

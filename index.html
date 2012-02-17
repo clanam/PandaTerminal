@@ -1,8 +1,8 @@
-<html>
+<!DOCTYPE html>
 <head>
-	<title>James Made a Panda</title>
-	<link href="./ninja.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="jquery.js"></script>
+    <title>James Made a Panda</title>
+    <link href="./ninja.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery.js"></script>
 </head>
 <body>
 
@@ -11,7 +11,7 @@
 <div id="terminal">
     <span id="output">
     </span>
-    <span>$ <span type="text" id="input"></span></span>
+    <span>$ <span type="text" id="input"></span><span class="cursor">&#9632;</span></span>
 </div>
 
 </div>
@@ -98,20 +98,25 @@ function parse(val) {
 }
 
 $terminal.bind('keypress', function(e) {
-    var v;
+    var v, key = e.keyCode? e.keyCode : e.which;
 
-    switch (e.keyCode) {
+	if (e.ctrlKey) {
+		return;
+	}
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    switch (key) {
         case 13: // return
             v = $input.html();
-            e.preventDefault();
             print(v);
             if (v) {
                 hist.push(v);
                 currentStep = history.length;
+            	parse(v);
+            	$input.html('');
             }
-            parse(v);
-            $input.html('');
-            $input.focus();
             break;
         case 38: // up arrow
             console.log('UP');
@@ -122,7 +127,7 @@ $terminal.bind('keypress', function(e) {
             $input.html(hist[currentStep]);
             break;
         default:
-            $input.append(String.fromCharCode(e.keyCode));
+            $input.append(String.fromCharCode(key));
             break;
     }
 });
