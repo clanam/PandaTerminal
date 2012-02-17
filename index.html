@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>James Made a Panda</title>
+	<link href="./ninja.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+
+<div id="tty">
+
+<div id="terminal">
+    <span id="output">
+    </span>
+    <span>$ <span type="text" id="input"></span></span>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+var $output = $('#output'),
+    $input = $('#input'),
+    $terminal = $('body'),
+
+    files = {
+        'hi.txt': 'hello there',
+        'bye.txt': 'i can\'t think of anything to write'
+    },
+    
+    hist = [],
+    currentStep = 0, // location in history
+
+    cmds = {
+        cat: function(file) {
+            if (typeof(file) !== 'string') {
+                print("No file specified.");
+                return;
+            }
+
+            if (files[file]) {
+                print(files[file]);
+            } else {
+                print(file + " not found.");
+            }
+        },
+        echo: function() {
+            if (arguments) {
+                print(Array.prototype.slice.call(arguments, 0).join(' '));
+            } else {
+                print(' ');
+            }
+        },
+        ls: function() {
+            var str = '';
+            $.each(files, function(key, val) {
+                str += ' ' + key;
+            });
+            print(str);
+        },
+        panda: function() {
+            print("          .--.");
+            print("         / _  \\  ___      .--.");
+            print("        | ( _.-\"\"   \`\'-.,\' _  \\");
+            print("         \\.\'            \'.  ) /");
+            print("         /                \\_.\'");
+            print("        /    .-.   .-.     \\");
+            print("        |   / o \\ / o \\    |");
+            print("        ;   \\.-'` `'-./    |");
+            print("        /\\      ._.       /");
+            print("      ;-'';_   ,_Y_,   _.'");
+            print("     /     \\`--.___.--;.");
+            print("    /|      '.__.---.  \\\\");
+            print("   ;  \\              \\  ;'--. .-.");
+            print("   |   '.    __..-._.'  |-,.-'  /");
+            print("   |     `\"\"`  .---._  / .--.  /");
+            print("  / ;         /      `-;/  /|_/");
+            print("  \\_,\\       |            | |");
+            print("  jgs '-...--'._     _..__\\/");
+            print("                `\"\"\"\`");
+        }
+    };
+
+function formatLine(str) {
+    return '<pre class="entry">$ ' + str + '</pre>';
+}
+
+function print(str) {
+    $output.append(formatLine(str));
+}
+
+function parse(val) {
+    var splat = val.split(/\s/);
+    if (splat && splat[0] && cmds[splat[0]]) {
+        cmds[splat[0]].apply(cmds, splat.slice(1));
+    } else {
+        print('unknown command: ' + val);
+    }
+}
+
+$terminal.bind('keypress', function(e) {
+    var v;
+
+    switch (e.keyCode) {
+        case 13: // return
+            v = $input.html();
+            e.preventDefault();
+            print(v);
+            if (v) {
+                hist.push(v);
+                currentStep = history.length;
+            }
+            parse(v);
+            $input.html('');
+            $input.focus();
+            break;
+        case 38: // up arrow
+            console.log('UP');
+            if (currentStep <= 0) {
+                return;
+            }
+            currentStep--;
+            $input.html(hist[currentStep]);
+            break;
+        default:
+            $input.append(String.fromCharCode(e.keyCode));
+            break;
+    }
+});
+
+</script>
+
+</body>
+</html>
