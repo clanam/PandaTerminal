@@ -4,18 +4,15 @@ html {
     background-color: black;
     color: white;
     font-family: monospace;
-    padding: 5px;
+    padding: 10px 5px;
 }
 
-body {
-	min-width: 400px;
-	min-height: 400px;
+pre {
+	margin: 0;
 }
 
 #input {
-    border: none;
     color: white;
-    font-family: monospace;
     background-color: transparent;
 }
 

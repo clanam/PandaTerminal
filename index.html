@@ -52,7 +52,7 @@ var $output = $('#output'),
         },
         ls: function() {
             var str = '';
-            $.each(files, function(key, val) {
+            $.each(files, function(key) {
                 str += ' ' + key;
             });
             print(str);
@@ -60,7 +60,7 @@ var $output = $('#output'),
         panda: function() {
             print("          .--.");
             print("         / _  \\  ___      .--.");
-            print("        | ( _.-\"\"   \`\'-.,\' _  \\");
+            print("        | ( _.-\"\"   `'-.,' _  \\");
             print("         \\.\'            \'.  ) /");
             print("         /                \\_.\'");
             print("        /    .-.   .-.     \\");
@@ -76,12 +76,12 @@ var $output = $('#output'),
             print("  / ;         /      `-;/  /|_/");
             print("  \\_,\\       |            | |");
             print("  jgs '-...--'._     _..__\\/");
-            print("                `\"\"\"\`");
+            print("                `\"\"\"`");
         }
     };
 
 function formatLine(str) {
-    return '<pre class="entry">$ ' + str + '</pre>';
+    return ['<pre class="entry">: ', str, '<\/pre>'].join('');
 }
 
 function print(str) {
