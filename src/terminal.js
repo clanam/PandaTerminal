@@ -74,7 +74,10 @@ $terminal.bind('keydown', function(e) {
             $input.append('.');
             break;
         default:
-            if (key >= 65 /*A*/ && key <= 90 /*Z*/) {
+            if (key >= 48 /*0*/ && key <= 57 /*9*/) {
+                letter = String.fromCharCode(key);
+                $input.append(letter);
+            } else if (key >= 65 /*A*/ && key <= 90 /*Z*/) {
                 letter = String.fromCharCode(key); // defaults to CAPS
                 letter = isShift? letter : letter.toLowerCase();
                 $input.append(letter);
