@@ -1,6 +1,6 @@
 /**
  *  Simple Printer class appends to a given JQuery object.
- *  Expects out to be a JQuery object.
+ *  Expects out to be a JQuery DOM object.
  *  @class Printer
  */
 var Printer = function(out) {
