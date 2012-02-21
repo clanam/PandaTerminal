@@ -2,6 +2,7 @@
  *  Simple Javascript terminal.
  *
  *  Requires parser.js for terminal commands.
+ *  Requires printer.js to create a printer for parser.js.
  */
 
 var $input = $('#input'),
@@ -10,7 +11,8 @@ var $input = $('#input'),
     hist = [],
     currentStep = 0, // location in history
 
-    waitingForCtrlSeq = false,
+    isCtrl = false,
+    isShift = true,
 
     parser = new Parser();
 
@@ -18,17 +20,23 @@ parser.out = new Printer($('#output'));
 
 $terminal.bind('keydown', function(e) {
     var v = $input.html(),
-        key = e.keyCode || e.which;
+        key = e.keyCode || e.which,
+        letter;
 
+    // if I don't do this, ctrl+r page reloads are getting munched
     if (e.ctrlKey || key === 91 /*ctrl*/) {
-        waitingForCtrlSeq = true;
+        isCtrl = true;
         return;
-    } else if (waitingForCtrlSeq && key === 16 /*shift*/) {
+    } else if (isCtrl && key === 16 /*shift*/) {
         return;
-    } else if (waitingForCtrlSeq) {
-        // if I don't do this, ctrl+r page reloads are getting munched
-        waitingForCtrlSeq = false;
+    } else if (isCtrl) {
+        isCtrl = false;
         return;
+    }
+
+    // deal with upper/lower case:
+    if (key === 16 /*shift*/) {
+        isShift = true;
     }
 
     e.preventDefault();
@@ -46,6 +54,9 @@ $terminal.bind('keydown', function(e) {
             parser.parse(v);
             $input.html('');
             break;
+        case 32: // space
+            $input.append(' ');
+            break;
         case 38: // up arrow
             if (currentStep <= 0) {
                 return;
@@ -53,8 +64,22 @@ $terminal.bind('keydown', function(e) {
             currentStep--;
             $input.html(hist[currentStep]);
             break;
+        case 188: // comma
+            $input.append(','); // from CharCode fails on some :(
+            break;
+        case 189: // dash
+            $input.append('-');
+            break;
+        case 190: // period
+            $input.append('.');
+            break;
         default:
-            $input.append(String.fromCharCode(key));
+            if (key >= 65 /*A*/ && key <= 90 /*Z*/) {
+                letter = String.fromCharCode(key); // defaults to CAPS
+                letter = isShift? letter : letter.toLowerCase();
+                $input.append(letter);
+                isShift = false;
+            }
             break;
     }
 });
