@@ -10,7 +10,7 @@ var Vi = function() {
 Vi.prototype = {
 
     /**
-     *  UI. The display area.  Defaults to $('vi').
+     *  UI. The display area.  Defaults to $('#vi').
      *  @property $ui
      */
     $ui: null,
@@ -21,7 +21,7 @@ Vi.prototype = {
      *  @protected
      */
     _init: function() {
-        this.$ui = $('vi');
+        this.$ui = $('#vi');
     },
 
     /**
@@ -30,7 +30,7 @@ Vi.prototype = {
      */
     die: function() {
         if (this.$ui) {
-            $ui.addClass('snoozing');
+            this.$ui.addClass('snoozing');
         }
     },
 
@@ -40,7 +40,7 @@ Vi.prototype = {
      */
     run: function() {
         if (this.$ui) {
-            $ui.removeClass('snoozing');
+            this.$ui.removeClass('snoozing');
         }
     }
 

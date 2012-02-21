@@ -44,8 +44,8 @@ Parser.prototype = {
                 return;
             }
 
-            if (this.files[file]) {
-                this.print(this.files[file]);
+            if (this._files[file]) {
+                this.print(this._files[file]);
             } else {
                 this.print(file + " not found.");
             }
@@ -78,7 +78,7 @@ Parser.prototype = {
 
         ls: function() {
             var str = '', first = true;
-            $.each(this.files, function(key) {
+            $.each(this._files, function(key) {
                 if (first) {
                     str += key;
                     first = false;
@@ -123,8 +123,8 @@ Parser.prototype = {
         },
 
         vi: function() {
-            if (this.vi) {
-                this.vi.run();
+            if (this._vi) {
+                this._vi.run();
             }
         }
     },
@@ -156,8 +156,8 @@ Parser.prototype = {
             self.print.apply(self, arguments);
         };
 
-        this.cmds.files = self.files;
-        this.cmds.vi = new Vi();
+        this.cmds._files = self.files;
+        this.cmds._vi = new Vi();
     },
 
     /**
