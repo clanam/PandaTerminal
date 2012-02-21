@@ -92,7 +92,7 @@ Parser.prototype = {
             this.print("          .--.");
             this.print("         / _  \\  ___      .--.");
             this.print("        | ( _.-\"\"   `'-.,' _  \\");
-            this.print("         \\.\'            \'.  ) /");
+            this.print("         \\.'            '.  ) /");
             this.print("         /                \\_.\'");
             this.print("        /    .-.   .-.     \\");
             this.print("        |   / o \\ / o \\    |");
