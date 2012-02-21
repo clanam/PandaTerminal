@@ -63,7 +63,9 @@ Parser.prototype = {
                 self = this;
 
             $.each(this, function(key) {
-                cmdList.push(key); // can i memo-ize this?
+                if (key !== 'files') { // make a blacklist later
+                    cmdList.push(key); // can i memo-ize this?
+                }
             });
 
             cmdList.sort();
@@ -169,7 +171,7 @@ Parser.prototype = {
         if (splat && splat[0]) {
             splat[0] = splat[0].toLowerCase(); // no case sensitivity
 
-            if (this.cmds[splat[0]]) {
+            if (typeof(this.cmds[splat[0]]) === 'function') {
                 this.cmds[splat[0]].apply(this.cmds, splat.slice(1));
             } else {
                 this.print('unknown command: ' + splat[0]);
