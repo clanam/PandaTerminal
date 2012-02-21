@@ -1,5 +1,10 @@
-var $output = $('#output'),
-    $input = $('#input'),
+/**
+ *  Simple Javascript terminal.
+ *
+ *  Requires printer.js for Printer object.
+ */
+
+var $input = $('#input'),
     $terminal = $('body'),
 
     files = {
@@ -12,24 +17,26 @@ var $output = $('#output'),
 
     waitingForCtrlSeq = false,
 
+    out = new Printer($('#output')),
+
     cmds = {
         cat: function(file) {
             if (typeof(file) !== 'string') {
-                print("No file specified.");
+                out.print("No file specified.");
                 return;
             }
 
             if (files[file]) {
-                print(files[file]);
+                out.print(files[file]);
             } else {
-                print(file + " not found.");
+                out.print(file + " not found.");
             }
         },
         echo: function() {
             if (arguments) {
-                print(Array.prototype.slice.call(arguments, 0).join(' '));
+                out.print(Array.prototype.slice.call(arguments, 0).join(' '));
             } else {
-                print(' ');
+                out.print(' ');
             }
         },
         ls: function() {
@@ -37,48 +44,44 @@ var $output = $('#output'),
             $.each(files, function(key) {
                 str += ' ' + key;
             });
-            print(str);
+            out.print(str);
         },
         panda: function() {
-            print("          .--.");
-            print("         / _  \\  ___      .--.");
-            print("        | ( _.-\"\"   `'-.,' _  \\");
-            print("         \\.\'            \'.  ) /");
-            print("         /                \\_.\'");
-            print("        /    .-.   .-.     \\");
-            print("        |   / o \\ / o \\    |");
-            print("        ;   \\.-'` `'-./    |");
-            print("        /\\      ._.       /");
-            print("      ;-'';_   ,_Y_,   _.'");
-            print("     /     \\`--.___.--;.");
-            print("    /|      '.__.---.  \\\\");
-            print("   ;  \\              \\  ;'--. .-.");
-            print("   |   '.    __..-._.'  |-,.-'  /");
-            print("   |     `\"\"`  .---._  / .--.  /");
-            print("  / ;         /      `-;/  /|_/");
-            print("  \\_,\\       |            | |");
-            print("  jgs '-...--'._     _..__\\/");
-            print("                `\"\"\"`");
+            out.print("          .--.");
+            out.print("         / _  \\  ___      .--.");
+            out.print("        | ( _.-\"\"   `'-.,' _  \\");
+            out.print("         \\.\'            \'.  ) /");
+            out.print("         /                \\_.\'");
+            out.print("        /    .-.   .-.     \\");
+            out.print("        |   / o \\ / o \\    |");
+            out.print("        ;   \\.-'` `'-./    |");
+            out.print("        /\\      ._.       /");
+            out.print("      ;-'';_   ,_Y_,   _.'");
+            out.print("     /     \\`--.___.--;.");
+            out.print("    /|      '.__.---.  \\\\");
+            out.print("   ;  \\              \\  ;'--. .-.");
+            out.print("   |   '.    __..-._.'  |-,.-'  /");
+            out.print("   |     `\"\"`  .---._  / .--.  /");
+            out.print("  / ;         /      `-;/  /|_/");
+            out.print("  \\_,\\       |            | |");
+            out.print("  jgs '-...--'._     _..__\\/");
+            out.print("                `\"\"\"`");
         }
     };
 
-function formatLine(str) {
-    return ['<pre class="entry">: ', str, '<\/pre>'].join('');
-}
-
-function print(str) {
-    $output.append(formatLine(str));
-}
-
 function parse(val) {
     var splat = val.split(/\s/);
+
     if (splat && splat[0]) {
         splat[0] = splat[0].toLowerCase(); // no case sensitivity
+
         if (cmds[splat[0]]) {
             cmds[splat[0]].apply(cmds, splat.slice(1));
+        } else {
+            out.print('unknown command: ' + splat[0]);
         }
     } else {
-        print('unknown command: ' + val);
+        out.print('unparsable command: ' + val);
     }
 }
 
@@ -105,10 +108,10 @@ $terminal.bind('keydown', function(e) {
             $input.html(v.substr(0, v.length-1));
             break;
         case 13: // return
-            print(v);
+            out.print(v);
             if (v) {
                 hist.push(v);
-                currentStep = history.length;
+                currentStep = hist.length;
                 parse(v);
                 $input.html('');
             }
