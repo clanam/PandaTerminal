@@ -11,15 +11,19 @@ pre {
     margin: 0;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
+.snoozing {
+    display: none;
+}
+
 #cursor {
     font-size: 123.1%;
     padding-left: 5px;
     position: relative;
     top: 2px;
-}
-
-#cursor.invisible {
-    visibility: hidden;
 }
 
 #input {
@@ -29,4 +33,14 @@ pre {
 
 #input:hover, #output .entry:hover {
     color: #CCF;
+}
+
+#vi {
+    background: #000;
+    left: 0;
+    height: 98%;
+    position: fixed;
+    top: 0;
+    width: 98%;
+    z-index: 1000;
 }
