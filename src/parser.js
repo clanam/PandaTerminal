@@ -2,6 +2,7 @@
  *  Parser class stores terminal commands.
  *  @class Parser
  *  @requires Printer
+ *  @requires Vi
  */
 var Parser = function() {
     this._init();
@@ -62,8 +63,8 @@ Parser.prototype = {
             var cmdList = [],
                 self = this;
 
-            $.each(this, function(key) {
-                if (key !== 'files') { // make a blacklist later
+            $.each(self, function(key) {
+                if (typeof(self[key] === 'function')) {
                     cmdList.push(key); // can i memo-ize this?
                 }
             });
@@ -119,6 +120,12 @@ Parser.prototype = {
             this.print("                _(\\.=  ;:;;'");
             this.print("               `\"_(  _/=\"`");
             this.print("        jgs     `\"'``");
+        },
+
+        vi: function() {
+            if (this.vi) {
+                this.vi.run();
+            }
         }
     },
 
@@ -150,6 +157,7 @@ Parser.prototype = {
         };
 
         this.cmds.files = self.files;
+        this.cmds.vi = new Vi();
     },
 
     /**
