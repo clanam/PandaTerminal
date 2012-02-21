@@ -3,7 +3,6 @@
  *  Expects out to be a JQuery object.
  *  @class Printer
  */
-
 var Printer = function(out) {
     if (out) {
         this.out = out;
@@ -22,6 +21,7 @@ Printer.prototype = {
      *  Format a line for HTML printing.
      *  Sticks the given string in a <pre></pre> block.
      *  @method formatLine.
+     *  @param {String} str
      */
     formatLine: function(str) {
         return ['<pre class="entry">: ', str, '<\/pre>'].join('');
@@ -31,6 +31,7 @@ Printer.prototype = {
      *  Prints the given string to output, after formatting
      *  to fit in with HTML.
      *  @method print
+     *  @param {String} str
      */
     print: function(str) {
         if (this.out) {
@@ -41,6 +42,7 @@ Printer.prototype = {
     /**
      *  Prints the given string to output, no formatting.
      *  @method printPlain
+     *  @param {String} str
      */
     printPlain: function(str) {
         if (this.out) {
