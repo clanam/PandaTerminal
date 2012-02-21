@@ -12,7 +12,7 @@ var $input = $('#input'),
     currentStep = 0, // location in history
 
     isCtrl = false,
-    isShift = true,
+    isShift = false,
 
     parser = new Parser();
 
