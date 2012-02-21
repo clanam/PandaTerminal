@@ -24,7 +24,7 @@ $terminal.bind('keydown', function(e) {
         letter;
 
     // if I don't do this, ctrl+r page reloads are getting munched
-    if (e.ctrlKey || key === 91 /*ctrl*/) {
+    if (e.ctrlKey || key === 91 /*ctrl-chrome*/ || key === 224 /*ctrl-ff*/) {
         isCtrl = true;
         return;
     } else if (isCtrl && key === 16 /*shift*/) {
