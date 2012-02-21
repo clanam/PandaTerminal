@@ -58,6 +58,21 @@ Parser.prototype = {
             }
         },
 
+        help: function() {
+            var cmdList = [],
+                self = this;
+
+            $.each(this, function(key) {
+                cmdList.push(key); // can i memo-ize this?
+            });
+
+            cmdList.sort();
+            this.print("Here is a list of all commands:");
+            cmdList.forEach(function(val) {
+                self.print("   " + val);
+            });
+        },
+
         ls: function() {
             var str = '', first = true;
             $.each(this.files, function(key) {
