@@ -1,3 +1,9 @@
+/**
+ *  Simple Printer class appends to a given JQuery object.
+ *  Expects out to be a JQuery object.
+ *  @class Printer
+ */
+
 var Printer = function(out) {
     if (out) {
         this.out = out;
@@ -7,6 +13,7 @@ var Printer = function(out) {
 Printer.prototype = {
     /**
      *  Where to print stuff to! :)
+     *  Expects a jquery DOM object.
      *  @property output
      */
     out: null,
