@@ -18,6 +18,18 @@ var $input = $('#input'),
 
 parser.out = new Printer($('#output'));
 
+$terminal.bind('keyup', function(e) {
+    var key = e.keyCode || e.which;
+
+    if (key === 91 /*ctrl-chrome*/ || key === 224 /*ctrl-ff*/) {
+        isCtrl = false;
+        return;
+    } else if (key === 16 /*shift*/) {
+        isShift = false;
+        return;
+    }
+});
+
 $terminal.bind('keydown', function(e) {
     var v = $input.html(),
         key = e.keyCode || e.which,
@@ -28,14 +40,9 @@ $terminal.bind('keydown', function(e) {
         isCtrl = true;
         return;
     } else if (isCtrl && key === 16 /*shift*/) {
+        isShift = true;
         return;
-    } else if (isCtrl) {
-        isCtrl = false;
-        return;
-    }
-
-    // deal with upper/lower case:
-    if (key === 16 /*shift*/) {
+    } else if (key === 16 /*shift*/) { // deal with upper/lower case:
         isShift = true;
     }
 
@@ -75,7 +82,7 @@ $terminal.bind('keydown', function(e) {
             $input.append(','); // from CharCode fails on some :(
             break;
         case 189: // dash
-            $input.append('-');
+            $input.append(isShift? '_' : '-');
             break;
         case 190: // period
             $input.append('.');
@@ -88,7 +95,6 @@ $terminal.bind('keydown', function(e) {
                 letter = String.fromCharCode(key); // defaults to CAPS
                 letter = isShift? letter : letter.toLowerCase();
                 $input.append(letter);
-                isShift = false;
             }
             break;
     }
