@@ -36,9 +36,14 @@ Parser.prototype = {
         },
 
         ls: function() {
-            var str = '';
+            var str = '', first = true;
             $.each(this.files, function(key) {
-                str += ' ' + key;
+                if (first) {
+                    str += key;
+                    first = false;
+                } else {
+                    str += ' ' + key;
+                }
             });
             this.print(str);
         },
