@@ -68,6 +68,17 @@ Parser.prototype = {
             this.print("  \\_,\\       |            | |");
             this.print("  jgs '-...--'._     _..__\\/");
             this.print("                `\"\"\"`");
+        },
+
+        squirrel: function() {
+            this.print("                        ,;:;;,");
+            this.print("                       ;;;;;");
+            this.print("               .=',    ;:;;:,");
+            this.print("              /_', \"=. ';:;:;");
+            this.print("              @=:__,  \\,;:;:'");
+            this.print("                _(\\.=  ;:;;'");
+            this.print("               `\"_(  _/=\"`");
+            this.print("        jgs     `\"'``");
         }
     },
 
