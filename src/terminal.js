@@ -64,6 +64,13 @@ $terminal.bind('keydown', function(e) {
             currentStep--;
             $input.html(hist[currentStep]);
             break;
+        case 40: //down arrow
+            if (currentStep >= hist.length) {
+                return;
+            }
+            currentStep++;
+            $input.html(hist[currentStep]);
+            break;
         case 188: // comma
             $input.append(','); // from CharCode fails on some :(
             break;
