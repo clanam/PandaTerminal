@@ -31,8 +31,8 @@ Parser.prototype = {
             this.print("      |   .\\/  \\      .--. __          \\ |");
             this.print("       '-'      '._       /  `\\         /");
             this.print("          jgs      `\\    '     |------'`");
-            this.print("                     \  |      |");
-            this.print("                      \        /");
+            this.print("                     \\  |      |");
+            this.print("                      \\        /");
             this.print("                       '._  _.'");
             this.print("                          ``");
         },
