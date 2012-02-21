@@ -14,6 +14,29 @@ Parser.prototype = {
      */
     cmds: {
 
+        bear: function() {
+            this.print("                ___   .--.");
+            this.print("          .--.-\"   \"-' .- |");
+            this.print("         / .-,`          .'");
+            this.print("         \\   `           \\");
+            this.print("          '.            ! \\");
+            this.print("            |     !  .--.  |");
+            this.print("            \\        '--'  /.____");
+            this.print("           /`-.     \\__,'.'      `\\");
+            this.print("        __/   \\`-.____.-' `\\      /");
+            this.print("        | `---`'-'._/-`     \\----'    _");
+            this.print("        |,-'`  /             |    _.-' `\\");
+            this.print("       .'     /              |--'`     / |");
+            this.print("      /      /\\              `         | |");
+            this.print("      |   .\\/  \\      .--. __          \\ |");
+            this.print("       '-'      '._       /  `\\         /");
+            this.print("          jgs      `\\    '     |------'`");
+            this.print("                     \  |      |");
+            this.print("                      \        /");
+            this.print("                       '._  _.'");
+            this.print("                          ``");
+        },
+
         cat: function(file) {
             if (typeof(file) !== 'string') {
                 this.print("No file specified.");
