@@ -22,7 +22,9 @@ Printer.prototype = {
      *  @method clear
      */
     clear: function() {
-        this.out.html('');
+        if (this.out) {
+            this.out.html('');
+        }
     },
 
     /**
