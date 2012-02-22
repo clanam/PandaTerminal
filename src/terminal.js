@@ -26,6 +26,7 @@ $terminal.bind('keydown', function(e) {
     if (isCtrl) {
         if (key === 75 /*k*/) {
             parser.clear();
+            hist = [];
         }
         return;
     }
