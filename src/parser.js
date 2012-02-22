@@ -64,7 +64,7 @@ Parser.prototype = {
                 self = this;
 
             $.each(self, function(key) {
-                if (typeof(self[key] === 'function')) {
+                if (typeof(self[key]) === 'function') {
                     cmdList.push(key); // can i memo-ize this?
                 }
             });
