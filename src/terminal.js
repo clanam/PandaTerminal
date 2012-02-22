@@ -11,28 +11,15 @@ var $input = $('#input'),
     hist = [],
     currentStep = 0, // location in history
 
-    isCtrl = false,
-    isShift = false,
-
     parser = new Parser();
 
 parser.out = new Printer($('#output'));
 
-$terminal.bind('keyup', function(e) {
-    var key = e.keyCode || e.which;
-
-    if (key === 91 /*ctrl-chrome*/ || key === 224 /*ctrl-ff*/) {
-        isCtrl = false;
-        return;
-    } else if (key === 16 /*shift*/) {
-        isShift = false;
-        return;
-    }
-});
-
 $terminal.bind('keydown', function(e) {
     var v = $input.html(),
         key = e.keyCode || e.which,
+        isCtrl = e.metaKey || false,
+        isShift = e.shiftKey || false,
         letter;
 
     // if I don't do this, ctrl+r page reloads are getting munched
@@ -41,14 +28,6 @@ $terminal.bind('keydown', function(e) {
             parser.clear();
         }
         return;
-    } else if (e.ctrlKey || key === 91 /*ctrl-chrome*/ || key === 224 /*ctrl-ff*/) {
-        isCtrl = true;
-        return;
-    } else if (isCtrl && key === 16 /*shift*/) {
-        isShift = true;
-        return;
-    } else if (key === 16 /*shift*/) { // deal with upper/lower case:
-        isShift = true;
     }
 
     e.preventDefault();
