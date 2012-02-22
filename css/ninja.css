@@ -2,9 +2,7 @@ html {
     background-color: black;
     color: white;
     font-family: monospace;
-    height: 100%;
     padding: 10px 5px;
-    width: 100%;
 }
 
 pre {
