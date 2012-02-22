@@ -2,6 +2,7 @@
  *  Parser class stores terminal commands.
  *  @class Parser
  *  @requires Printer
+ *  @requires Fs
  *  @requires Vi
  */
 var Parser = function() {
@@ -44,8 +45,12 @@ Parser.prototype = {
                 return;
             }
 
-            if (this._files[file]) {
-                this.print(this._files[file]);
+            if (Fs.files[file]) {
+                if (typeof(Fs.files[file]) === 'string') {
+                    this.print(Fs.files[file]);
+                } else {
+                    this.print(file + ' is not a file.');
+                }
             } else {
                 this.print(file + " not found.");
             }
@@ -77,16 +82,12 @@ Parser.prototype = {
         },
 
         ls: function() {
-            var str = '', first = true;
-            $.each(this._files, function(key) {
-                if (first) {
-                    str += key;
-                    first = false;
-                } else {
-                    str += ' ' + key;
-                }
-            });
-            this.print(str);
+            var list = Fs.ls();
+            if (list && list.join) {
+                this.print(list.join(' '));
+            } else {
+                this.print('no files');
+            }
         },
 
         panda: function() {
@@ -124,15 +125,6 @@ Parser.prototype = {
     },
 
     /**
-     *  Temporary representation of a file system.
-     *  @property files
-     */
-    files: {
-        'hi.txt': 'Hello, there!',
-        'bye.txt': 'I can\'t think of anything to write.'
-    },
-
-    /**
      *  Temporary way of handling console apps.
      *  @property openApp
      */
@@ -157,16 +149,17 @@ Parser.prototype = {
         };
 
         this.cmds.vi = function() {
+            var filename = arguments[0] || '';
+
             if (self._vi) {
                 self.openApp = self._vi;
                 self._vi.onDeath = function() {
                     self.openApp = null;
                 };
-                self._vi.run(this.openApp);
+                self._vi.run(filename);
             }
         };
 
-        this.cmds._files = self.files;
         this._vi = new Vi();
     },
 

@@ -1,6 +1,7 @@
 /**
  *  ^_^'
  * @class Vi
+ * @requires Fs
  */
 
 var Vi = function() {
@@ -70,8 +71,9 @@ Vi.prototype = {
     /**
      *  Start the mayhem.
      *  @method run
+     *  @param {String} filename
      */
-    run: function() {
+    run: function(filename) {
         if (this.$ui) {
             this.$ui.removeClass('snoozing');
         }
