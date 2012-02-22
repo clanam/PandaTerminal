@@ -9,8 +9,20 @@ pre {
     margin: 0;
 }
 
+.cmd {
+    color: #6AF;
+}
+
 .invisible {
     visibility: hidden;
+}
+
+.ls-file {
+    color: #AAF;
+}
+
+.ls-folder {
+    color: #0F9;
 }
 
 .snoozing {

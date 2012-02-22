@@ -181,15 +181,15 @@ Parser.prototype = {
     parse: function(val) {
         var splat;
 
-        this.print(val);
-
         if (!val) {
+            this.print('');
             return;
         }
 
         splat = val.split(/\s/);
 
         if (splat && splat[0]) {
+            this.print(['<span class="cmd">', splat[0], '</span> ', splat.slice(1).join(' ')].join(''));
             splat[0] = splat[0].toLowerCase(); // no case sensitivity
 
             if (typeof(this.cmds[splat[0]]) === 'function') {
