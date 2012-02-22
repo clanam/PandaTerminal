@@ -161,6 +161,16 @@ Parser.prototype = {
     },
 
     /**
+     *  Clear the printed area.
+     *  @method clear
+     */
+    clear: function() {
+        if (this.out && this.out instanceof Printer) {
+            this.out.clear();
+        }
+    },
+
+    /**
      *  Handle command parsing.
      *  @function parse
      *  @param {String} val the given command

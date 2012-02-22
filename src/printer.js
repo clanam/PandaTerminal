@@ -18,6 +18,14 @@ Printer.prototype = {
     out: null,
 
     /**
+     *  Clear the print area.
+     *  @method clear
+     */
+    clear: function() {
+        this.out.html('');
+    },
+
+    /**
      *  Format a line for HTML printing.
      *  Sticks the given string in a <pre></pre> block.
      *  @method formatLine.

@@ -37,6 +37,9 @@ $terminal.bind('keydown', function(e) {
 
     // if I don't do this, ctrl+r page reloads are getting munched
     if (isCtrl) {
+        if (key === 75 /*k*/) {
+            parser.clear();
+        }
         return;
     } else if (e.ctrlKey || key === 91 /*ctrl-chrome*/ || key === 224 /*ctrl-ff*/) {
         isCtrl = true;
