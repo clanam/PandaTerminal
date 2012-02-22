@@ -22,6 +22,11 @@ $terminal.bind('keydown', function(e) {
         isShift = e.shiftKey || false,
         letter;
 
+    if (parser.openApp) {
+        parser.openApp.io(e);
+        return;
+    }
+
     // if I don't do this, ctrl+r page reloads are getting munched
     if (isCtrl) {
         if (key === 75 /*k*/) {

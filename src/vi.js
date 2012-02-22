@@ -16,6 +16,13 @@ Vi.prototype = {
     $ui: null,
 
     /**
+     *  Flag: in edit mode or command mode?
+     *  @property _isEditMode
+     *  @protected
+     */
+    _isEditMode: false,
+
+    /**
      *  Initiate the vi object.
      *  @method _init
      *  @protected
@@ -32,6 +39,28 @@ Vi.prototype = {
         if (this.$ui) {
             this.$ui.addClass('snoozing');
         }
+    },
+
+    /**
+     *  Accepts a keyboard key event.  I need to abstract this out. :(
+     *  @method io
+     *  @param {Object} e the key event (JQuery format)
+     */
+    io: function(e) {
+        var v = $input.html(),
+            key = e.keyCode || e.which,
+            isCtrl = e.metaKey || false,
+            isShift = e.shiftKey || false,
+            letter;
+
+        if (isCtrl) {
+            return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.die();
     },
 
     /**

@@ -125,6 +125,7 @@ Parser.prototype = {
         vi: function() {
             if (this._vi) {
                 this._vi.run();
+                this.openApp = this._vi;
             }
         }
     },
@@ -137,6 +138,12 @@ Parser.prototype = {
         'hi.txt': 'Hello, there!',
         'bye.txt': 'I can\'t think of anything to write.'
     },
+
+    /**
+     *  Temporary way of handling console apps.
+     *  @property openApp
+     */
+    openApp: null,
 
     /**
      *  Printer object.
