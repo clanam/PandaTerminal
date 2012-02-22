@@ -120,13 +120,6 @@ Parser.prototype = {
             this.print("                _(\\.=  ;:;;'");
             this.print("               `\"_(  _/=\"`");
             this.print("        jgs     `\"'``");
-        },
-
-        vi: function() {
-            if (this._vi) {
-                this._vi.run();
-                this.openApp = this._vi;
-            }
         }
     },
 
@@ -163,8 +156,18 @@ Parser.prototype = {
             self.print.apply(self, arguments);
         };
 
+        this.cmds.vi = function() {
+            if (self._vi) {
+                self.openApp = self._vi;
+                self._vi.onDeath = function() {
+                    self.openApp = null;
+                };
+                self._vi.run(this.openApp);
+            }
+        };
+
         this.cmds._files = self.files;
-        this.cmds._vi = new Vi();
+        this._vi = new Vi();
     },
 
     /**

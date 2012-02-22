@@ -39,6 +39,10 @@ Vi.prototype = {
         if (this.$ui) {
             this.$ui.addClass('snoozing');
         }
+
+        if (typeof(this.onDeath) === 'function') {
+            this.onDeath();
+        }
     },
 
     /**
