@@ -29,14 +29,31 @@ var Fs = {
         'bye.txt': 'I can\'t think of anything to write.'
     },
 
+    /**
+     *  Return the contents of a given file on a given filepath,
+     *  or undefined if no such file found.
+     *  @method getContents
+     *  @param {String} filepath e.g. "hi.txt" or "myDir/bingopuppy.txt"
+     *  @return {String|Undefined}
+     */
     getContents: function(filepath) {
-        if (!filepath) {
+        var i, path, loc = Fs.files;
+
+        if (!filepath || typeof(filepath) !== 'string') {
             return;
         }
 
-//        var path = filename.split
+        path = filepath.split('/');
 
-        return;
+        for (i = 0; i < path.length; i++) {
+            if (!loc || typeof(loc) !== 'object' || typeof(loc[path[i]]) === 'undefined') {
+                return;
+            }
+
+            loc = loc[path[i]];
+        }
+
+        return loc;
     },
 
     /**
@@ -72,7 +89,14 @@ var Fs = {
      *  @return {String|Undefined}
      */
     typeOf: function(filepath) {
-        return typeof(this.getContents.apply(this, arguments));
+        var type = typeof(this.getContents.apply(this, arguments));
+        if (type === 'string') {
+            return 'file';
+        } else if (type === 'object') {
+            return 'folder';
+        } else {
+            return;
+        }
     }
 };
 
