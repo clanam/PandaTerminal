@@ -40,6 +40,31 @@ Parser.prototype = {
         },
 
         cat: function(file) {
+            if (!file) {
+                this.print("             *     ,MMM8&&&.            *");
+                this.print("                  MMMM88&&&&&    .");
+                this.print("                 MMMM88&&&&&&&");
+                this.print("     *           MMM88&&&&&&&&");
+                this.print("                 MMM88&&&&&&&&");
+                this.print("                 'MMM88&&&&&&'");
+                this.print("                   'MMM8&&&'      *");
+                this.print("          |\\___/|");
+                this.print("          )     (             .              '");
+                this.print("         =\\     /=");
+                this.print("           )===(       *");
+                this.print("          /     \\");
+                this.print("          |     |");
+                this.print("         /       \\");
+                this.print("         \\       /");
+                this.print("  _/\\_/\\_/\\__  _/_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_");
+                this.print("  |  |  |  |( (  |  |  |  |  |  |  |  |  |  |");
+                this.print("  |  |  |  | ) ) |  |  |  |  |  |  |  |  |  |");
+                this.print("  |  |  |  |(_(  |  |  |  |  |  |  |  |  |  |");
+                this.print("  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |");
+                this.print("  jgs|  |  |  |  |  |  |  |  |  |  |  |  |  |");
+                return;
+            }
+
             if (typeof(file) !== 'string') {
                 this.print("No file specified.");
                 return;
