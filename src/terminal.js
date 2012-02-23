@@ -77,6 +77,8 @@ $terminal.bind('keydown', function(e) {
         case 190: // period
             $input.append('.');
             break;
+        case 191: // forward slash & question mark
+            $input.append(isShift? '?' : '/');
         default:
             if (key >= 48 /*0*/ && key <= 57 /*9*/) {
                 letter = String.fromCharCode(key);
