@@ -29,6 +29,16 @@ var Fs = {
         'bye.txt': 'I can\'t think of anything to write.'
     },
 
+    getContents: function(filepath) {
+        if (!filepath) {
+            return;
+        }
+
+//        var path = filename.split
+
+        return;
+    },
+
     /**
      *  Lists all directories/files in the current directory.
      *  @method ls
@@ -53,6 +63,16 @@ var Fs = {
         files = folders.concat(files);
 
         return files;
+    },
+
+    /**
+     *  Returns 'file', 'folder', or undefined.
+     *  @method typeOf
+     *  @param {String} filepath e.g. "hi.txt" or "myDir/bubbles.txt"
+     *  @return {String|Undefined}
+     */
+    typeOf: function(filepath) {
+        return typeof(this.getContents.apply(this, arguments));
     }
 };
 

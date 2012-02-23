@@ -17,6 +17,12 @@ Vi.prototype = {
     $ui: null,
 
     /**
+     *  Path to current file in Fs.
+     *  @property _path
+     */
+    _path: '',
+
+    /**
      *  Flag: in edit mode or command mode?
      *  @property _isEditMode
      *  @protected
@@ -74,9 +80,13 @@ Vi.prototype = {
      *  @param {String} filename
      */
     run: function(filename) {
-        if (this.$ui) {
-            this.$ui.removeClass('snoozing');
+        if (!this.$ui) {
+            this.die();
         }
+
+		this._path = filename;
+		this.$ui.html(Fs.getContents(filename));
+        this.$ui.removeClass('snoozing');
     }
 
 };

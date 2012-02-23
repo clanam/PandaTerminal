@@ -45,14 +45,14 @@ Parser.prototype = {
                 return;
             }
 
-            if (Fs.files[file]) {
-                if (typeof(Fs.files[file]) === 'string') {
-                    this.print(Fs.files[file]);
-                } else {
-                    this.print(file + ' is not a file.');
-                }
+            var type = Fs.typeOf(file);
+
+            if (type === 'file') {
+                this.print(Fs.getContents(file));
+            } else if (type === 'folder') {
+                this.print(file + ' is a folder.');
             } else {
-                this.print(file + " not found.");
+                this.print(file + ' not found.');
             }
         },
 
