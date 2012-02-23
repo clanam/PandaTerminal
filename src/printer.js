@@ -34,7 +34,7 @@ Printer.prototype = {
      *  @param {String} str
      */
     formatLine: function(str) {
-        return ['<pre class="entry">: ', str, '<\/pre>'].join('');
+        return ['<pre class="entry">: ', str || '', '<\/pre>'].join('');
     },
 
     /**
@@ -56,7 +56,7 @@ Printer.prototype = {
      */
     printPlain: function(str) {
         if (this.out) {
-            this.out.append(str);
+            this.out.append(str || '');
         }
     }
 };
