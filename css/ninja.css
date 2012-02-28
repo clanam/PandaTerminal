@@ -1,4 +1,4 @@
-html {
+html, #vi {
     background-color: black;
     color: white;
     font-family: monospace;
@@ -29,6 +29,15 @@ pre {
     display: none;
 }
 
+span.vi-char {
+    padding: 0 3px;
+    width: 1em;
+}
+
+span.vi-char.cursor {
+    border-left: 1px solid #CCF;
+}
+
 #cursor {
     font-size: 123.1%;
     padding-left: 5px;
@@ -46,7 +55,6 @@ pre {
 }
 
 #vi {
-    background: #000;
     left: 0;
     height: 98%;
     position: fixed;

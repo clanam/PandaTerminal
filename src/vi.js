@@ -1,7 +1,7 @@
 /**
  *  ^_^'
- * @class Vi
- * @requires Fs
+ *  @class Vi
+ *  @requires Fs
  */
 
 var Vi = function() {
@@ -84,9 +84,38 @@ Vi.prototype = {
             this.die();
         }
 
-		this._path = filename;
-		this.$ui.html(Fs.getContents(filename));
+        this._path = filename;
+        this.$ui.html(this._viFormat(Fs.getContents(filename)));
         this.$ui.removeClass('snoozing');
-    }
+    },
 
+    /**
+     *  Format text to make it easier to style as fake vi text.
+     *  @method _viFormat
+     *  @protected
+     *  @param {String} text
+     *  @return {String}
+     */
+    _viFormat: function(text) {
+        var chars = text.split(''),
+            result = [],
+            i;
+
+        for (i = 0; i < chars.length; i++) {
+            result.push('<span class="vi-char');
+
+            if ((chars[i] >= 'a' && chars[i] <= 'z') || (chars[i] >= 'A' && chars[i] <= 'Z')) {
+                result.push(' vi-char-');
+                result.push(chars[i]);
+            }
+
+            result.push('" id="vi-pos-');
+            result.push(i);
+            result.push('">');
+            result.push(chars[i]);
+            result.push('</span>');
+        }
+
+        return result.join('');
+    }
 };
