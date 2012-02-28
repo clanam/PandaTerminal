@@ -1,3 +1,6 @@
+/* By HTML Element */
+
+
 html, #vi {
     background-color: black;
     color: white;
@@ -8,6 +11,10 @@ html, #vi {
 pre {
     margin: 0;
 }
+
+
+/* By Class */
+
 
 .cmd {
     color: #6AF;
@@ -36,7 +43,12 @@ span.vi-char {
 
 span.vi-char.cursor {
     border-left: 1px solid #CCF;
+    text-decoration: blink; /* FF, Opera only */
 }
+
+
+/* By ID */
+
 
 #cursor {
     font-size: 123.1%;
