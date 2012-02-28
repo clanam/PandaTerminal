@@ -115,7 +115,10 @@ Vi.prototype = {
         }
 
         this._path = filename;
-        contents = Fs.getContents(filename) || '';
+        contents = Fs.getContents(filename);
+        if (typeof(contents) !== 'string') {
+            contents = '';
+        }
         this._fileLength = contents.length;
 
         this.$ui.html(this._viFormat(contents));
