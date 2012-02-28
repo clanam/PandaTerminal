@@ -158,6 +158,11 @@ Vi.prototype = {
             i;
 
         for (i = 0; i < chars.length; i++) {
+            if (chars[i] === '\n') {
+                result.push('<br />');
+                continue;
+            }
+
             result.push('<span class="vi-char');
 
             if ((chars[i] >= 'a' && chars[i] <= 'z') || (chars[i] >= 'A' && chars[i] <= 'Z')) {
