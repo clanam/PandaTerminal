@@ -17,8 +17,26 @@ Vi.prototype = {
     $ui: null,
 
     /**
+     *  Cursor position
+     *  @property _cursor
+     *  @type {Number}
+     *  @protected
+     */
+    _cursor: 0,
+
+    /**
+     *  Length, in characters, of the current file.
+     *  @property _fileLength
+     *  @type {Number}
+     *  @protected
+     */
+    _fileLength: 0,
+
+    /**
      *  Path to current file in Fs.
      *  @property _path
+     *  @type {String}
+     *  @protected
      */
     _path: '',
 
@@ -80,13 +98,41 @@ Vi.prototype = {
      *  @param {String} filename
      */
     run: function(filename) {
+        var contents;
+
         if (!this.$ui) {
             this.die();
         }
 
         this._path = filename;
-        this.$ui.html(this._viFormat(Fs.getContents(filename)));
+        contents = Fs.getContents(filename) || '';
+        this._fileLength = contents.length;
+
+        this.$ui.html(this._viFormat(contents));
         this.$ui.removeClass('snoozing');
+        this._placeCursor(0);
+    },
+
+    /**
+     *  Places the cursor at a given position in the file.
+     *  Caps at 0 and at file.length.
+     *  @method _placeCursor
+     *  @param {Number} index
+     *  @protected
+     */
+    _placeCursor: function(index) {
+        var $cursed, $uncursed,
+            prev = this._cursor || 0;
+
+        index = (index < 0)? 0 : index;
+        index = (index > this._fileLength)? this._fileLength : index;
+        this._cursor = index;
+
+        $uncursed = $('#vi-pos-' + prev); // inefficient -- store?
+        $cursed = $('#vi-pos-' + this._cursor);
+
+        $uncursed.removeClass('cursor');
+        $cursed.addClass('cursor');
     },
 
     /**
@@ -115,6 +161,10 @@ Vi.prototype = {
             result.push(chars[i]);
             result.push('</span>');
         }
+
+        result.push('<span class="vi-char vi-char-end" id="vi-pos-');
+        result.push(chars.length);
+        result.push('">&nbsp;</span>');
 
         return result.join('');
     }
