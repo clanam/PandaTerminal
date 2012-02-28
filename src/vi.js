@@ -89,7 +89,17 @@ Vi.prototype = {
         e.preventDefault();
         e.stopPropagation();
 
-        this.die();
+        switch (key) {
+            case 37: // left arrow
+                this._placeCursor(this._cursor-1);
+                break;
+            case 39: // right arrow
+                this._placeCursor(this._cursor+1);
+                break;
+            default:
+                this.die();
+                break;
+        }
     },
 
     /**

@@ -42,7 +42,8 @@ span.vi-char {
 }
 
 span.vi-char.cursor {
-    border-left: 1px solid #CCF;
+    border-left: 1px solid #AAF;
+    padding: 0 3px 0 2px;
     text-decoration: blink; /* FF, Opera only */
 }
 
